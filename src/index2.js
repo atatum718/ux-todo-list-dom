@@ -38,4 +38,13 @@ function renderTodoApp() {
   // and maybe some here
 }
 
+let todoButton = document.querySelector("#button");
+let inputBox = document.querySelector("#input");
+
+function buttonClick() {
+  todos.push(inputBox.value);
+  console.log(todos);
+}
+todoButton.addEventListener("click", buttonClick);
+
 renderTodoApp();
