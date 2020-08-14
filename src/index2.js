@@ -17,20 +17,22 @@ let todos = [
   },
 ];
 
+let app = document.querySelector("#app");
+let h1 = document.createElement("h1");
+// your code here
+let todoList = document.createElement("ul");
+
+h1.innerText = "Todo List";
+app.appendChild(h1);
+app.appendChild(todoList);
+
 function renderTodoApp() {
-  let app = document.querySelector("#app");
-  let h1 = document.createElement("h1");
-  // your code here
-  let todoList = document.createElement("ul");
-
-  h1.innerText = "Todo List";
-  app.appendChild(h1);
-  app.appendChild(todoList);
-
+  todoList.innerHTML = "";
+  let todoMarkup = "";
   for (let i = 0; i < todos.length; i++) {
     let todoItems = todos[i];
     let stateOfCheckBox = todoItems.completed ? "checked" : "";
-    let todoMarkup = `
+    todoMarkup = `
     <li><input type="checkbox" ${stateOfCheckBox}/>${todoItems.description}</li>
     `;
     todoList.innerHTML += todoMarkup;
@@ -39,12 +41,16 @@ function renderTodoApp() {
 }
 
 let todoButton = document.querySelector("#button");
-let inputBox = document.querySelector("#input");
 
 function buttonClick() {
-  todos.push(inputBox.value);
+  let inputBox = document.querySelector("#input");
+  let newTask = {
+    completed: false,
+    description: inputBox.value,
+  };
+  todos.push(newTask);
   console.log(todos);
+  renderTodoApp();
 }
-todoButton.addEventListener("click", buttonClick);
 
 renderTodoApp();
